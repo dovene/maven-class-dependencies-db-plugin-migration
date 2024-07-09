@@ -19,5 +19,51 @@
       <artifactId>slf4j-simple</artifactId>
       <version>2.0.13</version>
     </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>4.28.0</version>
+  </dependency>
+  <dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>9.0.0</version>
+</dependency>
+  <dependency>
+    <groupId>org.flywaydb</groupId>
+    <artifactId>flyway-core</artifactId>
+    <version>10.15.2</version>
+</dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>7.8.2</version>
+        <configuration>
+          <url>jdbc:mysql://localhost:3306/school</url>
+          <user>root</user>
+          <password>rootroot</password>
+          <locations>
+            <location>filesystem:src/main/resources/db/migrations</location>
+          </locations>
+          <baselineOnMigrate>true</baselineOnMigrate>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.liquibase</groupId>
+        <artifactId>liquibase-maven-plugin</artifactId>
+        <version>4.28.0</version>
+        <configuration>
+            <changeLogFile>src/main/resources/db/liquibase/changelog.xml</changeLogFile>
+            <url>jdbc:mysql://localhost:3306/school</url>
+            <username>root</username>
+            <password>rootroot</password>
+        </configuration>
+    </plugin>
+    
+ 
+    </plugins>
+  </build>
 </project>
